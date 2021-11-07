@@ -1,0 +1,135 @@
+extends base.pug
+
+block title
+    title Registro Alumnos
+
+block container
+    .registrar
+        form(action="/registro" method="post").container
+            h1 Registrar Alumno
+            hr
+            .form.group.mb-3.row
+                .form.group.mb-3.col-3
+                    .form-group
+                        label(for="nombre") Nombre
+                        input#nombre.form-control(type="text" name="nombre" required="required")
+                    
+                    .form-group.mt-3
+                        label(for="apellido") Apellido
+                        input#apellido.form-control(type="text" name="apellido" required="required")
+
+                    .form-group.mt-3
+                        label(for="telefono") Teléfono
+                        input#telefono.form-control(type="text" name="telefono" required="required")
+                    
+                    .form-group.mt-3
+                        label(for="correo") Correo
+                        input#correo.form-control(type="text" name="correo" required="required")
+
+                    .form-group.mt-3
+                        label(for="idcarrera") Carrera
+                        select#idcarrera.select.form-control.input-lg(name='idcarrera')
+                            option(value='0') ---- Seleccione la carrera ----
+                            if(datos)
+                                each c in datos
+                                    option(value=c.idcarrera)  #{c.nombrecarrera}
+                                    
+
+                    .form-group.mt-3
+                        .d-grid.gap-2
+                            button.btn.btn-primary Registrar
+
+                        .d-grid.gap-2.mt-1
+                            a.btn.btn-success(href="/") Inicio
+                .form.group.mb-3.col-9
+                    table.table
+                            thead
+                                tr
+                                    th(scope='col') #
+                                    th(scope='col') Nombre
+                                    th(scope='col') Apellido
+                                    th(scope='col') Teléfono
+                                    th(scope='col') Correo
+                                    th(scope='col') Carrera
+                                    th(scope='col') Acciones
+                                tr
+                            tbody.tbody-info
+                                if(datosA)
+                                    each a in datosA
+                                        tr
+                                            td #{a.idalumno}
+                                            td #{a.nombre}
+                                            td #{a.apellido}
+                                            td #{a.telefono}
+                                            td #{a.correo}
+                                            td #{a.nombrecarrera}
+                                            td
+                                                a.btn.btn-sm.btn-primary.ml-2(style={width: '50%'})(href="javascript:editar(" + "'" + a.idalumno + "'" + "," + "'" + a.nombre + "'" + "," + "'" + a.apellido + "'" + "," + "'" + a.telefono + "'" + "," + "'" + a.correo + "'" + "," + "'" + a.idcarrera + "'" + ")") Editar
+                                                a.btn.btn-sm.btn-danger.ml-2(style={width: '50%'})(href=`/eliminarAlumno/` + a.idalumno) Borrar
+                                        tr
+    .editar
+        form#form-alumnos.needs-validation(action="" method="post").container
+            h1 Editar Alumno
+            hr
+            .form.group.mb-3.row
+                input#idalumno.form-control.disable(type="text" name="id" required="required")
+                .form.group.mb-3.col-3
+                    .form-group
+                        label(for="nombre") Nombre
+                        input#nombreE.form-control.disable(type="text" name="nombre" required="required")
+                    
+                    .form-group.mt-3
+                        label(for="apellido") Apellido
+                        input#apellidoE.form-control.disable(type="text" name="apellido" required="required")
+
+                    .form-group.mt-3
+                        label(for="telefono") Teléfono
+                        input#telefonoE.form-control.disable(type="text" name="telefono" required="required")
+                    
+                    .form-group.mt-3
+                        label(for="correo") Correo
+                        input#correoE.form-control.disable(type="text" name="correo" required="required")
+
+                    .form-group.mt-3
+                        label(for="idcarrera") Carrera
+                        select#idcarreraE.select.form-control.input-lg.disable(name='idcarrera' required="required")
+                            if(datos)
+                                each c in datos
+                                    option(value=c.idcarrera selected=c.idcarrera)  #{c.nombrecarrera}
+                                    
+
+                    .form-group.mt-3
+                        .d-grid.gap-2
+                            button.btn.btn-primary(type="submit") Editar
+
+                        .d-grid.gap-2.mt-1
+                            a.btn.btn-success(href="/registro") Cancelar
+                .form.group.mb-3.col-9
+                    table.table
+                            thead
+                                tr
+                                    th(scope='col') #
+                                    th(scope='col') Nombre
+                                    th(scope='col') Apellido
+                                    th(scope='col') Teléfono
+                                    th(scope='col') Correo
+                                    th(scope='col') Carrera
+                                    th(scope='col') Acciones
+                                tr
+                            tbody.tbody-info
+                                if(datosA)
+                                    each a in datosA
+                                        tr
+                                            td #{a.idalumno}
+                                            td #{a.nombre}
+                                            td #{a.apellido}
+                                            td #{a.telefono}
+                                            td #{a.correo}
+                                            td #{a.nombrecarrera}
+                                            td
+                                                a.btn.btn-sm.btn-primary.ml-2(style={width: '50%'})(href="javascript:editar(" + "'" + a.idalumno + "'" + "," + "'" + a.nombre + "'" + "," + "'" + a.apellido + "'" + "," + "'" + a.telefono + "'" + "," + "'" + a.correo + "'" + "," + "'" + a.idcarrera + "'" + ")") Editar
+                                                a.btn.btn-sm.btn-danger.ml-2(style={width: '50%'})(href=`/eliminarAlumno/` + a.idalumno) Borrar
+                                        tr
+
+block script 
+    script(src="./js/registro.js")

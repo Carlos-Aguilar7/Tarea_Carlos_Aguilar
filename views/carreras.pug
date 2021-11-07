@@ -1,0 +1,92 @@
+extends base.pug
+
+block title
+    title Registrar carreras
+
+block container
+    .registrar
+        form(action="/carreras" method="post").container
+            h1 Registrar Carrera
+            hr
+            .form.group.mb-3.row
+                .form.group.mb-3.col-4
+                    .form-group
+                        label(for="nombrecarrera") Nombre de la Carrera
+                        input#nombrecarrera.form-control(type="text" name="nombrecarrera" required="required")
+                    
+                    .form-group.mt-3
+                        label(for="descripcion") Descripción
+                        input#descripcion.form-control(type="text" name="descripcion" required="required")
+
+                    .form-group.mt-3
+                        .d-grid.gap-2
+                            button.btn.btn-primary Registrar
+
+                        .d-grid.gap-2.mt-1
+                            a.btn.btn-success(href="/") Inicio
+                .form.group.mb-3.col-8
+                    table.table
+                        thead
+                            tr
+                                th(scope='col') #
+                                th(scope='col') Carrera
+                                th(scope='col') Descripción
+                                th(scope='col') Acciones
+                            tr
+                        tbody.tbody-info
+                            if(datos)
+                                each c in datos
+                                    tr
+                                        td #{c.idcarrera}
+                                        td #{c.nombrecarrera}
+                                        td #{c.descripcion}
+                                        td
+                                            a.btn.btn-sm.btn-primary.ml-2(style={width: '50%'})(href="javascript:editar(" + "'" + c.idcarrera + "'" + "," + "'" + c.nombrecarrera + "'" + "," + "'" + c.descripcion + "'" + ")") Editar
+                                            a.btn.btn-sm.btn-danger.ml-2(style={width: '50%'})(href=`/eliminarCarrera/` + c.idcarrera) Eliminar
+                                    tr
+    .editar
+        form#form-carreras.needs-validation(action="" method="post").container
+            h1 Editar Carrera
+            hr
+            .form.group.mb-3.row
+                .form.group.mb-3.col-4
+                    input#idcarrera.form-control.disable(type="text" name="id" required="required")
+                    .form-group
+                        label(for="nombrecarrera") Nombre de la Carrera
+                        input#nombrecarreraE.form-control.disable(type="text" name="nombrecarrera" required="required")
+                    
+                    .form-group.mt-3
+                        label(for="descripcion") Descripción
+                        input#descripcionE.form-control.disable(type="text" name="descripcion" required="required")
+
+                    .form-group.mt-3
+                        .d-grid.gap-2
+                            button.btn.btn-primary(type="submit") Editar
+
+                        .d-grid.gap-2.mt-1
+                            a.btn.btn-success(href="/carreras") Cancelar
+                .form.group.mb-3.col-8
+                    table.table
+                        thead
+                            tr
+                                th(scope='col') #
+                                th(scope='col') Carrera
+                                th(scope='col') Descripción
+                                th(scope='col') Acciones
+                            tr
+                        tbody.tbody-info
+                            if(datos)
+                                each c in datos
+                                    tr
+                                        td #{c.idcarrera}
+                                        td #{c.nombrecarrera}
+                                        td #{c.descripcion}
+                                        td
+                                            a.btn.btn-sm.btn-primary.ml-2(style={width: '50%'})(href="javascript:editar(" + "'" + c.idcarrera + "'" + "," + "'" + c.nombrecarrera + "'" + "," + "'" + c.descripcion + "'" + ")") Editar
+                                            a.btn.btn-sm.btn-danger.ml-2(style={width: '50%'})(href=`/eliminarCarrera/` + c.idcarrera) Eliminar
+                                    tr
+        
+
+
+block script 
+    script(src="./js/carreras.js")

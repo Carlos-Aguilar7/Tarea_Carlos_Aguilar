@@ -1,0 +1,28 @@
+extends base.pug
+
+block title
+    title Welcome
+
+block container
+    form.container
+            h1 Alumnos - Carreras
+            hr
+            .form.group.mb-3.row.contenedor
+                .form.group.mb-3.col-6
+                    .form-group.mt-3
+                        .d-grid.gap-2
+                            center
+                                img.logo(src='./img/alumno.png')(style={width:"50%", height:"100%"})
+                    .form-group.mt-3
+                        .d-grid.gap-2
+                            a.btn.btn-success(href="/registro") Ir a alumnos
+                .form.group.mb-3.col-6
+                    .form-group.mt-3
+                        .d-grid.gap-2
+                            center 
+                                img.logo(src='./img/carreras.jpg')(style={width:"50%", height:"237px"})
+                    .form-group.mt-3
+                        .d-grid.gap-2
+                            a.btn.btn-success(href="/carreras") Ir a carreras
+                            
+
